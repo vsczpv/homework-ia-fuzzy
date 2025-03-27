@@ -1,7 +1,5 @@
 package org.example;
 
-import org.example.BetterFuzz.Trapezoid;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -27,5 +25,19 @@ public class FuzzyVar {
 			double val = var.proportion(v);
 			store.put(var.getName(), val);
 		}
+	}
+
+	public String unfuzz(HashMap<String,Double> store) {
+		double max = Double.MIN_VALUE;
+		Trapezoid res = null;
+		for (var e : enums) {
+			var x = store.get(e.getName());
+			if (x > max) {
+				max = x;
+				res = e;
+			}
+		}
+		assert res != null;
+		return res.getName();
 	}
 }
